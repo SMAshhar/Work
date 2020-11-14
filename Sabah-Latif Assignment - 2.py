@@ -1,5 +1,5 @@
 ###########################################################################################
-##################### Self registeration students on the school website ###################
+################### Self registeration students on the University portal ##################
 ###########################################################################################
 ### This program will do the following:                                                 ###
 ### 1. Ask user for a login path or a registeration path                                ###
@@ -24,23 +24,36 @@
 import json
 import csv
 
+###########################################################################################
+############################### Defining the login function ###############################
+###########################################################################################
+
 def login():
 
+    # Conditioning for while loop. As long as check is 0, loop will keep running.
     check = 0
 
     while check == 0:
 
-        username = input("\tPlease Enter your Enrol No.     : ")
-        password = input("\tPlease Enter your password      : ")
+        # Login process will require username and password. Here we are taking enrollment 
+        # number as username.
+        username = input("\tPlease Enter your Enrol No.     :    ")
+        password = input("\tPlease Enter your password      :    ")
 
+        # Loading data from data.json file in the same folder. username and password will 
+        # be checked against this data.
         with open("data.json") as j:
             dict_1 = json.load(j)
 
+            # Unless the following two conditions are true, the loop will keep on asking for 
+            # username and passowrd.
             if username in dict_1 and dict_1[username][0] == password:
                 check = 1
                 x = input("\tLogin successful. Please press enter to view your Student ID card : ")
                 
-                                    
+                # The following template block will generate the students ID card putting in all 
+                # the infromation from dict_1. 
+                                   
                 print(f"""       
                 \t\t========================================================\t
                 \t\tABC University for Computer Sceinces
@@ -50,44 +63,62 @@ def login():
                 \t\tFather's Name = {dict_1[username][3]}
                 \t\tCNIC = {dict_1[username][4]}
                 \t\tCourse Applied = {dict_1[username][5]}
-                \t\tR. No = {username}
+                \t\tEnroll. No = {username}
 
                 \t\tPlease don't loose your assigned Enrollment number
                 \t\t========================================================\t
                 """)
+
+            # If the two conditions from line 44 aren't true, it prompt the user to try again and 
+            # will re-initiate the login sequence
+
             else:
                 print("\tData doesn't match, Please try again.")
 
+###########################################################################################
+############################# Defining the register function ##############################
+###########################################################################################
 
 def register():
 
+    # Loading data from data.json for checking against CNIC availability
     with open("data.json") as j:
         dict_1 = json.load(j)
 
+    # Loading data from data.csv, which will be used to generate the new Enrollment Number
     with open("data.csv", "r") as f:
         x = csv.reader(f)
         y = []
         for a in x:
             y += a
 
+    # A check for the loop which will run through the data from data.json file
     check = 0
-    check2 = 0
-    
+ 
     while check == 0:                  
 
         CNIC = input("\tPlease enter your CNIC : ")
 
         for a in dict_1.values():
+            # check2 will be used to communicate the findings from the for loop for registeration check for further 
+            # processing 
             check2 = 1
             if CNIC == a[4]:
+
                 print("\tThis CNIC has already been registered. Please try again.")
                 check2 = 0
+
             else:
                 continue
+        # If no match for current registered CNIC are found, check will be set to 1, thereby ending the while
+        # loop and continuing on with the next step.    
         if check2 == 1:
             check = 1
 
-            
+###########################################################################################
+############################### Starting program from here. ###############################
+###########################################################################################       
+    
     print("\tCNIC available.")
 
     print("""
@@ -142,16 +173,16 @@ def register():
 
 
 print("""
-
+#################################################
 ***
 
 Welcome to ABC School online portal
 
 ***
-
+#################################################
 """)
 
-choice = input("""
+choice = input("""#################################################
 
 Please select your preference:
 
