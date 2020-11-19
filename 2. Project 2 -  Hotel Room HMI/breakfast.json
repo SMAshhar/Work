@@ -1,4 +1,5 @@
-{"1": {"English" : "3-Slices of bread, half fried sunny-side up egg, 4 pieces of hunter-beef and Black Tea"},
- "2": {"Arabic" : "Falafel, 4-dates with cream, hummus, 1-cup milk"},
- "3": {"Japanese" : "Mixed rice with either ikura, Eggs with furikake, Pickled vegetable salad, Grilled fish"},
- "4" : {"Aussie" : "Granger, Lantana, Laynes Espresso and Daisy Green"}}
+{"1": ["English", "3-Slices of bread, half fried sunny-side up egg, 4 pieces of hunter-beef and Black Tea."],
+ "2": ["Arabic", "Falafel, 4-dates with cream, hummus, 1-cup milk."],
+ "3": ["Japanese", "Mixed rice with either ikura, Eggs with furikake, Pickled vegetable salad, Grilled fish."],
+ "4" : ["Aussie", "Granger, Lantana, Laynes Espresso and Daisy Green."]
+}

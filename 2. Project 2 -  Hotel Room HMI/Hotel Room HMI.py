@@ -126,11 +126,11 @@ def choice():
 ###########################################################################################
 ### The food function will do the following jobs:                                       ###
 ### 1. Identify what time of the day is it from morning, afternoon and eavening.        ###
-### 2. Load data from pre-designed menu for that perticular time                        ###
+### 2. Load data from pre-designed menu for that perticular time.                        ###
 ### 3. Display the the appropriate menu.                                                ###
 ### 4. Take input from user about what does they want. Do repeat if they input          ###
 ### something wrong.                                                                    ###
-### 5. Take selection, compile the selection and generate a .txt file with the room     ##
+### 5. Take selection, compile the selection and generate a .txt file with the room     ###
 ### name and order detail.                                                              ###        
 ###########################################################################################
 
@@ -144,7 +144,7 @@ def food():
         with open("breakfast.json") as j:
             menu = json.load(j)
 
-        # Prompting user for selction of choice
+        # Prompting user for selection of choice
         print("\tPlease select from the following menu : ")
 
         # Printing all the choices one-by-one
@@ -249,47 +249,55 @@ def complain():
     now = datetime.datetime.now()
 
     # Catagory will be predefined as "Others", will change with future choice.
-    Catagory = "Others"
+    Category = "Others"
 
     print("""
         FIrst of all, we highly regret that you have to come to this section.
-        Please select from the following catagories : 
+        Please select from the following categories : 
         """)
-    catagories = ["Staff", "Food", "Room", "Room Service", "Security"]
+    categories = ["Staff", "Food", "Room", "Room Service", "Security"]
 
-    # Listing the catagories in a list manner.
-    for i, item in enumerate(catagories):
+    # Listing the categories in a list manner.
+    for i, item in enumerate(categories):
         print("\t", i+1, item)
 
-    # Innitiating error handling. If a catagory was selected from one of the 
-    # listed ones, it will change the catagory to that. Else, catagory will
+    # Innitiating error handling. If a category was selected from one of the 
+    # listed ones, it will change the category to that. Else, catagory will
     # remain "Others".
     try:
         complainType = int(input("""
         Please enter from 1 to 5 to select catagory, else press any key for 
-        others catagory : """))
+        others category : """))
         if complainType > 0 and complainType <= 5:
-            Catagory = catagories[complainType - 1]
+            Category = categories[complainType - 1]
     # If user chooses something else, the function continues with catagory as
     # "Others".
     except:
         pass
     
+    # Following will take in the detail of the complain
     complain = input("""
         Please enter the detail of your complain below the line: 
         --------------------------------------------------------
         """)
     print("-------------------------------------------------------------------")
-    complain = f"{Catagory} : {complain}"
+
+    # Following code will compile the Catagory with complain which will be presenetd
+    # later.
+    complain = f"{Category} : {complain}"
     print("\t", complain, sep=(""))
 
-
+    # The following block will make the time stamp with date and time to register the 
+    # complain
     b = ""
     x = str(now)
     for a in x:
         if a != "-" and a != ":":
             b += a
 
+    # Following block will generate a new ".txt" file, comprising of two parts.
+    # 1. Username, defining the Room Number, from where the complaint is made.
+    # 2. Time stamp, giving off date first with time of the day complain was registered.
     with open((f"{username} {b[:15]}.txt"), "w") as f:
         f.write(complain)
 
@@ -297,14 +305,13 @@ def complain():
     print("-------------------------------------------------------------------")
 
     input()
-
+    # When the complain is done, user will be taken back to the choice screen.
     choice()
 
+###########################################################################################
+########################### Innitiating the program from here #############################
+###########################################################################################
+
+# The program will start as soon as we call the login function.
 
 login()
-            
-
-
-        
-
-       
