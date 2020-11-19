@@ -43,15 +43,20 @@ def welcome():
 
     # If choice is 1, login function is called. 
     if choice == "1":
+        print("----------------------------------------------------")
         login() 
 
     # If choice is 2, register function is called.
     elif choice == "2":
+        print("----------------------------------------------------")
         register()
+        
 
     # If choice is any other, a prompt will be made for a proper selection.
     else:
         print("\n\tInvalid selection. Please try again.")
+        print("----------------------------------------------------")
+        input()
         welcome()
 
 
@@ -99,32 +104,40 @@ def login():
         1. Enter 1 to view your Student ID card
         2. Enter 2 to change your current password 
         Choice : """)
+        
+
                 
                 # The following template block will generate the students ID card putting in all 
                 # the information from dict_1. 
 
-                if x == "1":                  
+                if x == "1": 
+                    print("----------------------------------------------------")                 
                     print(f"""       
-                    \t\t========================================================\t
-                    \t\t        ABC University for Computer Sciences
-                    \t\t========================================================\t
+                    \t========================================================\t
+                    \t        ABC University for Computer Sciences
+                    \t========================================================\t
                                         \t\t STUDENT ID CARD
 
-                    \t\tName = {dict_1[username][1]} {dict_1[username][2]}
-                    \t\tFather's Name = {dict_1[username][3]}
-                    \t\tCNIC = {dict_1[username][4]}
-                    \t\tCourse Applied = {dict_1[username][5]}
-                    \t\tEnroll. No = {username}
+                    \tName = {dict_1[username][1]} {dict_1[username][2]}
+                    \tFather's Name = {dict_1[username][3]}
+                    \tCNIC = {dict_1[username][4]}
+                    \tCourse Applied = {dict_1[username][5]}
+                    \tEnroll. No = {username}
 
-                    \t\tPlease don't loose your assigned Enrollment number
-                    \t\t========================================================\t
+                    \tPlease don't loose your assigned Enrollment number
+                    \t========================================================\t
                     """)
+                    print("----------------------------------------------------")
 
                 elif x == "2":
+                    print("----------------------------------------------------")
+                    print("----------------------------------------------------")
                     changePass(username)
                 
                 else:
+                    print("----------------------------------------------------")
                     print("\t\tInvalid selection")
+                    print("----------------------------------------------------")
                     login()
                 
             # If the two conditions from line 44 aren't true, it prompt the user to try again and 
@@ -132,8 +145,10 @@ def login():
 
             else:
                 print("\tData doesn't match, Please try again.")
+                print("----------------------------------------------------")
 
     # This will bring back the initial page for path selection.
+    input()
     welcome()
 
 ###########################################################################################
@@ -159,6 +174,7 @@ def register():
     while check == 0:                  
 
         CNIC = input("\tPlease enter your CNIC : ")
+        print("----------------------------------------------------")
 
         for a in dict_1.values():
             # check2 will be used to communicate the findings from the for loop for registeration 
@@ -167,6 +183,7 @@ def register():
             if CNIC == a[4]:
 
                 print("\tThis CNIC has already been registered. Please try again.")
+                print("----------------------------------------------------")
                 check2 = 0
 
             else:
@@ -179,6 +196,7 @@ def register():
     # Will print this line after the While loop dies. It will only happen if CNIC number provided has
     # never been used before.
     print("\tCNIC available.")
+    print("----------------------------------------------------")
 
     # This print section will be display the successful transition from CNIC checkup to further data
     # collection.
@@ -191,6 +209,7 @@ def register():
     *************************************
                 
     """)
+    print("----------------------------------------------------")
 
     # From here, the data collection will start. Each input will be assigned to a variable for later
     # use in Student ID card generation.
@@ -200,6 +219,7 @@ def register():
     fatherName = input("\tPlease enter your Father's name : ")
     course = input("\tPlease enter the applied course : ")
     password = input("\tPlease enter password for your profile : ")
+    print("----------------------------------------------------")
 
     #########################################################################################################
     # Enrollment Number is generated in the following single statement. The statement is divided into two   #
@@ -231,25 +251,27 @@ def register():
     with open("data.csv", "a", newline = "") as f:
         z = csv.writer(f, delimiter = ",")
         z.writerow(y)
+    print("----------------------------------------------------")
 
     # After all the data is stored, the Student ID card is generated in the following format.     
     print(f"""    
-                \t\t========================================================\t
-                \t\t        ABC University for Computer Sciences
-                \t\t========================================================\t
-                                    \t\t STUDENT ID CARD
+                \t========================================================\t
+                \t        ABC University for Computer Sciences
+                \t========================================================\t
+                                    \t STUDENT ID CARD
 
-                \t\tName = {firstName} {lastName}
-                \t\tFather's Name = {fatherName}
-                \t\tCNIC = {CNIC}
-                \t\tCourse Applied = {course}
-                \t\tEnroll. No. = {enroll}
+                \tName = {firstName} {lastName}
+                \tFather's Name = {fatherName}
+                \tCNIC = {CNIC}
+                \tCourse Applied = {course}
+                \tEnroll. No. = {enroll}
 
-                \t\tPlease don't loose your assigned Enrollment number
-                \t\t========================================================\t
+                \tPlease don't loose your assigned Enrollment number
+                \t========================================================\t
                 """)
     
     # This will bring back the initial page for path selection.
+    input()
     welcome()
 
 ###########################################################################################
@@ -264,7 +286,9 @@ def changePass(username):
 
     # Following statement is asking for user to input new password and is going to assign that
     # password to the provided username from login function.
+    print("----------------------------------------------------")
     dict_2[username][0] = input("\tPlease enter your new password : ")
+    print("----------------------------------------------------")
 
     # Once dict_2 is updated with a changed password, the updated change will be updated 
     # in the json file
@@ -273,6 +297,8 @@ def changePass(username):
 
     # Prompting user for successful change.
     print("\tPassword has been successfully changed")
+    print("----------------------------------------------------")
+    input()
 
     # Program will continue on with the login function.
     
@@ -281,16 +307,17 @@ def changePass(username):
 ###########################################################################################  
 
 # The program will start with the following set of strings. 
+
 print("""
 #################################################
 *************************************************
 
-      Welcome to ABC School online portal
+    Welcome to ABC University online portal
 
 *************************************************
 #################################################
 """)
 
 # From here, the welcome function is called. Thereby actually starting the program.
-
+input()
 welcome()
