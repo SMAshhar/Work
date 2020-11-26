@@ -77,21 +77,7 @@ def login():
     *************************************
                 
     """)
-
-    # Conditioning for while loop. As long as check is 0, user will stay in login function.
-    check = 0
-
-    while check == 0:
-
-        # Login process will require username and password. Here we are taking enrollment 
-        # number as username.
-        username = input("\tPlease Enter your Enrol No. : ")
-        password = input("\tPlease Enter your password  : ")
-
-        # Loading data from data.json file in the same folder. username and password will 
-        # be checked against this data.
-        with open("data.json") as j:
-            dict_1 = json.load(j)
+8
 
             # Unless the following two conditions are true, the loop will keep on asking for 
             # correct username and password.
@@ -121,29 +107,7 @@ def login():
                     \tName = {dict_1[username][1]} {dict_1[username][2]}
                     \tFather's Name = {dict_1[username][3]}
                     \tCNIC = {dict_1[username][4]}
-                    \tCourse Applied = {dict_1[username][5]}
-                    \tEnroll. No = {username}
 
-                    \tPlease don't loose your assigned Enrollment number
-                    \t========================================================\t
-                    """)
-                    print("----------------------------------------------------")
-
-                elif x == "2":
-                    print("----------------------------------------------------")
-                    print("----------------------------------------------------")
-                    changePass(username)
-                
-                else:
-                    print("----------------------------------------------------")
-                    print("\t\tInvalid selection")
-                    print("----------------------------------------------------")
-                    login()
-                
-            # If the two conditions from line 44 aren't true, it prompt the user to try again and 
-            # will re-initiate the login sequence.
-
-            else:
                 print("\tData doesn't match, Please try again.")
                 print("----------------------------------------------------")
 
@@ -187,20 +151,7 @@ def register():
                 check2 = 0
 
             else:
-                continue
-        # If no match for current registered CNIC are found, check will be set to 1, thereby ending 
-        # the while loop and continuing on with the next step.    
-        if check2 == 1:
-            check = 1
 
-    # Will print this line after the While loop dies. It will only happen if CNIC number provided has
-    # never been used before.
-    print("\tCNIC available.")
-    print("----------------------------------------------------")
-
-    # This print section will be display the successful transition from CNIC checkup to further data
-    # collection.
-    print("""
                 
     *************************************
                 
@@ -241,48 +192,6 @@ def register():
 
     # To add the enrollment number on the CSV file, we need to convert the new generated enrollment number 
     # into list. Which is done below.
-    y = [enroll]
- 
-    # The updated dict_1 is written on the json file.
-    with open("data.json", "w") as j:
-        json.dump(dict_1, j)
-
-    # The CSV file is updated with the new enrollment number.
-    with open("data.csv", "a", newline = "") as f:
-        z = csv.writer(f, delimiter = ",")
-        z.writerow(y)
-    print("----------------------------------------------------")
-
-    # After all the data is stored, the Student ID card is generated in the following format.     
-    print(f"""    
-                \t========================================================\t
-                \t        ABC University for Computer Sciences
-                \t========================================================\t
-                                    \t STUDENT ID CARD
-
-                \tName = {firstName} {lastName}
-                \tFather's Name = {fatherName}
-                \tCNIC = {CNIC}
-                \tCourse Applied = {course}
-                \tEnroll. No. = {enroll}
-
-                \tPlease don't loose your assigned Enrollment number
-                \t========================================================\t
-                """)
-    
-    # This will bring back the initial page for path selection.
-    input()
-    welcome()
-
-###########################################################################################
-########################## Defining password changing fucntion ############################
-###########################################################################################  
-
-def changePass(username):
-
-    # The following two lines will load data from file for editing.
-    with open("data.json") as j:
-        dict_2 = json.load(j)
 
     # Following statement is asking for user to input new password and is going to assign that
     # password to the provided username from login function.
