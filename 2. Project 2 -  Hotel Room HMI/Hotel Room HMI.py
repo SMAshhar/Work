@@ -25,38 +25,7 @@
 ###     vii,    Ask the user if he wants to continue. If yes, go to point(5).           ###
 ###     viii,   Else end program with a message.                                        ###
 ###########################################################################################
-###########################################################################################
-
-import datetime
-import json
-
-# We have defined floors of the hotel, each having 4 rooms. 
-# Each room is assigned a separate 4-digit key which will be provided to current owner.
-# These will be used by user to login to the HMI provided in the hotel room.
-
-dict1 = {"A1" : 8567,
-         "A2" : 6741,
-         "A3" : 7845,
-         "A4" : 2587,
-         "B1" : 6541,
-         "B2" : 9875,
-         "B3" : 8546,
-         "B4" : 9673,}
-
-###########################################################################################
-############################### Defining the login function ###############################
-###########################################################################################
-
-def login():
-
-    # This print section will be displayed defining the successful transition to the login path
-
-    print("""
-                
-    ****************************************
-                
-        Welcome to the ABC Hotel Service.
-                
+#
     ****************************************
                 
     """)
@@ -85,22 +54,7 @@ def login():
             print("\tNo match found. Please try again.")
             print("-------------------------------------------------------------------")
 
-###########################################################################################
-###################### Defining the Food/Complain Choice function #########################
-###########################################################################################
 
-def choice():
-    print("-------------------------------------------------------------------")
-    print("""        Welcome to ABC Hotel's Online Service               """)
-    print("-------------------------------------------------------------------")
-    x = input("""
-        Please select from following menu: 
-            1. Enter 1 for ordering of food
-            2. Enter 2 for listing a complain
-            Choice : """)
-    if x == "1":
-        # If choice 1 is selected, the food function will be called from inside the 
-        # choice function. 
         print("-------------------------------------------------------------------")
         food()
 
@@ -116,32 +70,7 @@ def choice():
         print("\tWrong Input. Please try again.")
         print("-------------------------------------------------------------------")
         
-        choice()
-    
-
-###########################################################################################
-############################### Defining the Food function ################################
-###########################################################################################
-
-###########################################################################################
-### The food function will do the following jobs:                                       ###
-### 1. Identify what time of the day is it from morning, afternoon and eavening.        ###
-### 2. Load data from pre-designed menu for that perticular time.                        ###
-### 3. Display the the appropriate menu.                                                ###
-### 4. Take input from user about what does they want. Do repeat if they input          ###
-### something wrong.                                                                    ###
-### 5. Take selection, compile the selection and generate a .txt file with the room     ###
-### name and order detail.                                                              ###        
-###########################################################################################
-
-def food():
-    # Identifying current datetime via datetime module
-    now = datetime.datetime.now()
-
-    #  Checking if it is breakfast time. 
-    if now < now.replace(hour=11, minute=0, second=0, microsecond=0):
-        # loading data for breakfast
-        with open("breakfast.json") as j:
+        choic
             menu = json.load(j)
 
         # Prompting user for selection of choice
@@ -156,45 +85,7 @@ def food():
         foods = input("\tChoice : ")
         print("-------------------------------------------------------------------")
         # If bad selection is made, food function will be called again with a prompt
-        # to the user.
-        if foods not in menu.keys():
-            print("\tPlease select from the provided list")
-            print("-------------------------------------------------------------------")
-            food()
-        # If selection is within bounds, function will continue.
-        else:
-            order = f"""        {menu[foods][0]} breakfast selected. Please wait, your 
-        breakfast will be at your door in a few minutes."""
-            print(order)
-            # The order will be placed in a .txt file named against the room number, 
-            # carrying details about the order.
-            with open((username+".txt"), "w") as f:
-                f.write(f"{username} : {menu[foods]}")
-
-    # Checking if it is lunch time.
-
-    elif now < now.replace(hour=17, minute=0, second=0, microsecond=0):
-        # loading data for lunch
-        with open("lunch.json") as j:
-            menu = json.load(j)
-
-        # Prompting user for selction of choice
-        print("\tPlease select from the following menu : ")
-
-        for a in menu.keys():
-            print(f"\t{a} : {menu[a][0]} : {menu[a][1]}")
-        print("-------------------------------------------------------------------")
-        foods = input("\tChoice : ")
-        print("-------------------------------------------------------------------")
-        # If bad selection is made, food function will be called again with a prompt
-        # to the user.
-        if foods not in menu.keys():
-            print("\tPlease select from the provided list")
-            print("-------------------------------------------------------------------")
-            food()
-
-        else:
-            order = f"""        {menu[foods][0]} lunch selected. Please wait, 
+]} lunch selected. Please wait, 
         your lunch will be at your door in a few minutes."""
             print(order)
             # The order will be placed in a .txt file named against the room number, 
@@ -231,86 +122,7 @@ def food():
             print(order)
             # The order will be placed in a .txt file named against the room number, 
             # carrying details about the order.
-            with open((username+".txt"), "w") as f:
-                f.write(f"{username} : {menu[foods]}")
-    print("-------------------------------------------------------------------")
-
-    input()
-    # Recalling the choice function takes you to back to the welcome screen.
-    choice()
-
-###########################################################################################
-############################# Defining the Complain function ##############################
-###########################################################################################
-
-def complain():
-
-    # Datetime is identified here as a stamp on the complaint.
-    now = datetime.datetime.now()
-
-    # Catagory will be predefined as "Others", will change with future choice.
-    Category = "Others"
-
-    print("""
-        FIrst of all, we highly regret that you have to come to this section.
-        Please select from the following categories : 
-        """)
-    categories = ["Staff", "Food", "Room", "Room Service", "Security"]
-
-    # Listing the categories in a list manner.
-    for i, item in enumerate(categories):
-        print("\t", i+1, item)
-
-    # Innitiating error handling. If a category was selected from one of the 
-    # listed ones, it will change the category to that. Else, catagory will
-    # remain "Others".
-    try:
-        complainType = int(input("""
-        Please enter from 1 to 5 to select catagory, else press any key for 
-        others category : """))
-        if complainType > 0 and complainType <= 5:
-            Category = categories[complainType - 1]
-    # If user chooses something else, the function continues with catagory as
-    # "Others".
-    except:
-        pass
-    
-    # Following will take in the detail of the complain
-    complain = input("""
-        Please enter the detail of your complain below the line: 
-        --------------------------------------------------------
-        """)
-    print("-------------------------------------------------------------------")
-
-    # Following code will compile the Catagory with complain which will be presenetd
-    # later.
-    complain = f"{Category} : {complain}"
-    print("\t", complain, sep=(""))
-
-    # The following block will make the time stamp with date and time to register the 
-    # complain
-    b = ""
-    x = str(now)
-    for a in x:
-        if a != "-" and a != ":":
-            b += a
-
-    # Following block will generate a new ".txt" file, comprising of two parts.
-    # 1. Username, defining the Room Number, from where the complaint is made.
-    # 2. Time stamp, giving off date first with time of the day complain was registered.
-    with open((f"{username} {b[:15]}.txt"), "w") as f:
-        f.write(complain)
-
-    print("\tYour complain has been registered.")
-    print("-------------------------------------------------------------------")
-
-    input()
-    # When the complain is done, user will be taken back to the choice screen.
-    choice()
-
-###########################################################################################
-########################### Innitiating the program from here #############################
-###########################################################################################
+##############################################
 
 # The program will start as soon as we call the login function.
 
