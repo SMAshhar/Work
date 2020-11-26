@@ -62,42 +62,7 @@ def login():
 def register():
 
     with open("data.json") as j:
-        dict_1 = json.load(j)
 
-    with open("data.csv", "r") as f:
-        x = csv.reader(f)
-        y = []
-        for a in x:
-            y += a
-
-    check = 0
-    check2 = 0
-    
-    while check == 0:                  
-
-        CNIC = input("\tPlease enter your CNIC : ")
-
-        for a in dict_1.values():
-            check2 = 1
-            if CNIC == a[4]:
-                print("\tThis CNIC has already been registered. Please try again.")
-                check2 = 0
-            else:
-                continue
-        if check2 == 1:
-            check = 1
-
-            
-    print("\tCNIC available.")
-
-    print("""
-                
-    *****
-                
-    Welcome to the registeration section.
-                
-    *****
-                
     """)
 
     firstName = input("\tPlease Enter your First name : ")
@@ -129,27 +94,6 @@ def register():
                 \t\t========================================================\t
 
                 \t\tName = {firstName} {lastName}
-                \t\tFather's Name = {fatherName}
-                \t\tCNIC = {CNIC}
-                \t\tCourse Applied = {course}
-                \t\tEnroll. No. = {enroll}
-
-                \t\tPlease don't loose your assigned Enrollment number
-                \t\t========================================================\t
-                """)
-
-
-
-
-print("""
-
-***
-
-Welcome to ABC School online portal
-
-***
-
-""")
 
 choice = input("""
 
@@ -159,9 +103,4 @@ Please select your preference:
     Press 2 for New Registeration
     Choice : """)
 
-if choice == "1":
-    login()
-
-elif choice == "2":
-    register()
 
