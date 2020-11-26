@@ -45,38 +45,7 @@ def welcome():
         register()
 
 
-###########################################################################################
-############################### Defining the login function ###############################
-###########################################################################################
 
-def login():
-
-    # This print section will be displaed as the successful transition to the login path
-
-    print("""
-                
-    *************************************
-                
-        Welcome to the Login section.
-                
-    *************************************
-                
-    """)
-
-    # Conditioning for while loop. As long as check is 0, loop will keep running.
-    check = 0
-
-    while check == 0:
-
-        # Login process will require username and password. Here we are taking enrollment 
-        # number as username.
-        username = input("\tPlease Enter your Enrol No.     :    ")
-        password = input("\tPlease Enter your password      :    ")
-
-        # Loading data from data.json file in the same folder. username and password will 
-        # be checked against this data.
-        with open("data.json") as j:
-            dict_1 = json.load(j)
 
             # Unless the following two conditions are true, the loop will keep on asking for 
             # username and passowrd.
@@ -118,26 +87,7 @@ def login():
 
 def register():
 
-    # Loading data from data.json for checking against CNIC availability.
-    with open("data.json") as j:
-        dict_1 = json.load(j)
-
-    # Loading data from data.csv, which will be used to generate the new Enrollment Number.
-    with open("data.csv", "r") as f:
-        x = csv.reader(f)
-        y = []
-        for a in x:
-            y += a
-
-    # A check for the loop which will run through the data from data.json file.
-    check = 0
- 
-    while check == 0:                  
-
-        CNIC = input("\tPlease enter your CNIC : ")
-
-        for a in dict_1.values():
-            # check2 will be used to communicate the findings from the for loop for registeration 
+    # Loading data from data.js
             # check for further processing. 
             check2 = 1
             if CNIC == a[4]:
@@ -168,34 +118,7 @@ def register():
                 
     """)
 
-    # From here, the data collection will start. Each input will be assigned to a variable for later
-    # use in Student ID card generation.
-
-    firstName = input("\tPlease Enter your First name : ")
-    lastName = input("\tPlease enter your last name : ")
-    fatherName = input("\tPlease enter your Father's name : ")
-    course = input("\tPlease enter the applied course : ")
-    password = input("\tPlease enter password for your profile : ")
-
-    #########################################################################################################
-    # Enrollment Number is generated in the following single statement. The statement is divided into two   #
-    # parts. The course[:2] will take the first two charactors from the course input. i.e. if course is     #
-    # CS50 the first part will be CS. In the same manner, if the course selection is EN30, the first part   #
-    # will be EN. The next part (which is numeric part) is int(y[-1][-4:]) + 1. y[-1] represents the last   #
-    # item from the data collected from the CSV file, and [-4:] represents the last 4 numbers from that     #
-    # number. 1 is added in them to generate a new enrollment number.                                       #
-    # Lastly, this number will be converted into string and added into the characters from the first        #
-    # part. and the sum will generate a full enrollment number, for example: "CS" + "1234" = "CS1234"       #
-    #########################################################################################################
-
-    enroll = course[:2] + str(int(y[-1][-4:]) + 1)
-                
-    # dict_1 was taken from data.json. The dict_1 is updated with the new enrollment number. All data is 
-    # stored as a list against the key, that is the new enrollment number. CNIC is taken from the approved
-    # CNIC in line 101
-    dict_1[enroll] = [password, firstName, lastName, fatherName, CNIC, course]
-
-    # To add the enrollment number on the CSV file, we need to convert the new generated enrollment number 
+    # From here,e CSV file, we need to convert the new generated enrollment number 
     # into list. Which is done below.
     y = [enroll]
  
@@ -215,20 +138,7 @@ def register():
                 \t\t========================================================\t
                                     \t\t STUDENT ID CARD
 
-                \t\tName = {firstName} {lastName}
-                \t\tFather's Name = {fatherName}
-                \t\tCNIC = {CNIC}
-                \t\tCourse Applied = {course}
-                \t\tEnroll. No. = {enroll}
-
-                \t\tPlease don't loose your assigned Enrollment number
-                \t\t========================================================\t
-                """)
-    
-    # This will bring back the initial page for path selection.
-    welcome()
-
-
+                \t\tName = {
 ###########################################################################################
 ############################### Starting program from here. ###############################
 ###########################################################################################  
